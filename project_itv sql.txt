@@ -1,0 +1,148 @@
+create database project_itv;
+use project_itv;
+-----------------------------------------------------------------------------------------------------------------------
+create table product(
+product_id int primary key,
+product_name varchar(100),
+part_number int,
+product_label varchar(100),
+starting_inventory int,
+inventory_received int,
+inventory_shipped int,
+inventory_onhand int,
+minimum_required int
+);
+select * from product;
+DESC product;
+insert into product(product_id,product_name,part_number,product_label,starting_inventory,inventory_received,inventory_shipped,inventory_onhand,minimum_required)
+values
+(1,'Product A',101,'Label 1',100,50,20,130,50),
+(2,'Hp',102,'Hpserver',550,30,20,10,40),
+(3,'Google',103,'googleassist',20,20,30,15,60),
+(4,'asus',104,'asusserver',400,20,50,40,30),
+(5,'foxin',105,'foxinserver',900,50,20,30,20),
+(6,'adobe',106,'adobeserver',800,40,20,30,80),
+(7,'chrome',107,'chromeserver',530,20,50,50,20),
+(8,'microsoft',108,'microserver',300,50,20,70,60),
+(9,'nokia',109,'nokiaserver',500,50,70,10,20),
+(10,'samsung',110,'samsungserver',800,20,40,40,90),
+(11,'oneplus',111,'onepluserver',200,20,30,50,80),
+(12,'iphone',112,'iphoneserver',600,20,50,70,25),
+(13,'micromax',113,'microserver',500,80,20,60,45),
+(14,'sony',114,'sonyserver',800,50,50,60,20),
+(15,'mini',115,'miniserver',300,20,60,70,90),
+(16,'vod',116,'vodserver',116,100,120,50,80),
+(17,'smart',117,'smartserver',500,10,22,60,20),
+(18,'iptv',118,'iptvserver',200,100,30,50,50),
+(19,'hmm',119,'hmmserver',600,80,50,20,10),
+(20,'imdb',120,'imdbserver',600,50,80,70,20),
+(21,'skoda',121,'skodaserver',200,60,40,30,20),
+(22,'bmw',122,'bmwserver',90,20,20,50,30),
+(23,'mercedes',123,'mercedesserver',120,30,50,80,90),
+(24,'mg',124,'mgserver',120,50,80,20,30),
+(25,'hector',125,'hectorserver',30,50,80,40,99);
+DESC product;
+create table supplier (
+supplier_id int primary key,
+supplier_name varchar (100)
+);
+select * from supplier;
+insert into supplier 
+values
+(601, 'mahesh'),
+(602, 'suresh'),
+(603, 'ramesh'),
+(604, 'ritika'),
+(605, 'sama');
+select * from supplier;
+desc supplier;
+-----------------------------------------------------------------------------------------------------------
+create table purchase (
+purchase_id int primary key,
+supplier_id int,
+product_id int,
+number_received int,
+purchase_date date,
+foreign key (product_id) references product(product_id),
+foreign key (supplier_id) references supplier(supplier_id)
+);
+select * from purchase;
+desc purchase;
+INSERT INTO purchase values (purchase_id, supplier_id, product_id, number_received, purchase_date),
+(501,602,11,100,'2023-08-26'),
+(502,603,9,550,'2023-08-27'),
+(503,603,3,20,'2023-08-28'),
+(504,604,4,400,'2023-08-29'),
+(505,605,5,900,'2023-08-30'),
+(506,602,6,800,'2023-09-01'),
+(507,601,7,530,'2023-09-02'),
+(508,603,8,300,'2023-09-03'),
+(509,602,5,500,'2023-09-04'),
+(510,603,10,800,'2023-09-05'),
+(511,603,1,200,'2023-09-06'),
+(512,605,15,600,'2023-09-07'),
+(513,604,13,500,'2023-09-08'),
+(514,601,14,800,'2023-09-09'),
+(515,603,18,300,'2023-09-10'),
+(516,602,16,116,'2023-09-11'),
+(517,602,17,500,'2023-09-12'),
+(518,601,18,200,'2023-09-13'),
+(519,602,20,600,'2023-09-14'),
+(520,605,25,600,'2023-09-15'),
+(521,603,12,200,'2023-09-16'),
+(522,604,22,90,'2023-09-17'),
+(523,603,23,120,'2023-09-18'),
+(524,604,14,120,'2023-09-19'),
+(525,605,25,30,'2023-09-21');
+select * from purchase;
+select * from product;
+-------------------------------------------------------------------------------------------------------------------
+create table orders (
+order_id int primary key,
+title varchar (100),
+first_name varchar (100),
+middle_name varchar (100),
+last_name varchar(100),
+product_id int,
+number_shipped int,
+order_date date,
+foreign key (product_id) references product(product_id)
+);
+select * from orders;
+desc orders;
+insert into orders (order_id,title,first_name,middle_name,last_name,product_id,number_shipped,order_date)
+values
+(201,'demo','hussain','siraj','mutur',3,2,'2023-6-10'),
+(202,'module','mahesh','dalle','suhas',4,6,'2023-6-11'),
+(203,'transcoder','suresh','sukah','chadda',5,7,'2023-6-12'),
+(204,'antik','chandan','wadhawa','ghandi',6,8,'2023-6-13'),
+(205,'vod','ramesh','chandu','dhole',7,9,'2023-6-14'),
+(206,'mask','abhu','mithal','jha',8,1,'2023-6-15'),
+(207,'comtent','abdhu','ismail','qureshi',9,11,'2023-6-16'),
+(208,'sources','bharti','ganesh','patil',1,12,'2023-6-17'),
+(209,'support','amar','akbar','anthony',2,13,'2023-6-18'),
+(210,'load','eenka','meene','deeka',13,14,'2023-6-19'),
+(211,'reload','seema','rekha','dixit',14,15,'2023-6-20'),
+(212,'painkiller','suda','muda','rudra',15,16,'2023-6-21'),
+(213,'heroess','virat','khholi','pandya',6,17,'2023-6-22'),
+(214,'cineplex','rahul','shataram','bhalekar',10,18,'2023-6-23'),
+(215,'hijack','cyan','blue','bold',1,19,'2023-6-24'),
+(216,'Mr','John','red','Doe',19,5,'2023-06-25'),
+(217,'Ms','Jane','Ann','Smith',11,3,'2023-07-12'),
+(218,'Dr','David','baaab','Williams',11,8,'2023-08-05'),
+(219,'Mrs','Emily','Grace','Johnson',12,2,'2023-09-18'),
+(220,'Mr','Michael','yellow','Brown',3,7,'2023-10-30'),
+(221,'Ms','Sophia','Marie','Miller',4,1,'2023-11-11'),
+(222,'Dr','William','gold','Jones',15,4,'2023-12-24'),
+(223,'Mrs','Olivia','Rose','Davis',16,9,'2023-01-07'),
+(224,'Mr','Alexander','silver','Martinez',7,6,'2023-02-18'),
+(225,'Ms','Emma','Grace','Anderson',8,3,'2023-03-25');
+-------------------------------------------------------------------------------------------------------------
+select * from orders;
+select * from purchase;
+select * from product;
+select * from supplier;
+desc product;
+desc purchase;
+desc supplier;
+--------------------------------------------------------------------------------------------------------------
